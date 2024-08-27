@@ -1,7 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 const path = require('path')
+
+require('dotenv').config({
+  path: path.resolve('.env')
+})
 
 module.exports = {
   entry: {
@@ -43,6 +48,9 @@ module.exports = {
           to: path.resolve(__dirname, 'dist/')
         }
       ]
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
     })
   ]
 }
